@@ -36,7 +36,7 @@ const OilsVehicleLists = () => {
 
   const handlePrint = (e) => {
     var party_type = 'vehicle';
-    fetch('http://localhost:5000/generate_pdf/'+party_type+'/'+l_partyId+'/'+localStorage.getItem('id'))
+    fetch('http://35.154.229.254/generate_pdf/'+party_type+'/'+l_partyId+'/'+localStorage.getItem('id'))
     .then(resp => resp.blob())
     .then(blob => {
       const url = window.URL.createObjectURL(blob);
@@ -85,7 +85,7 @@ const OilsVehicleLists = () => {
     {
       if($("#btnvehclesubmit").text().trim() == "Save")
       {
-        fetch('http://localhost:5000/add_vehicle_values', { 
+        fetch('http://35.154.229.254/add_vehicle_values', { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -113,7 +113,7 @@ const OilsVehicleLists = () => {
       }
       else if($("#btnvehclesubmit").text().trim() == "Update")
         {
-            fetch('http://localhost:5000/update_vehicle_setup', { 
+            fetch('http://35.154.229.254/update_vehicle_setup', { 
               method: 'POST', 
               headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  },
@@ -158,7 +158,7 @@ const OilsVehicleLists = () => {
       $('#vehicle_table').DataTable().destroy();
     }
     $('#vehicle_table tbody').empty();
-    fetch('http://localhost:5000/vehicle_data'+'/'+localStorage.getItem('id')).then((res) =>
+    fetch('http://35.154.229.254/vehicle_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsdata) => {
        for (let i = 0; i < jsdata.length; i++) {
         if(jsdata[i].veh_type.toString().trim() == "oil")
@@ -187,7 +187,7 @@ const OilsVehicleLists = () => {
       loadJQueryAndDataTables()
         .then(($) => {
           window.$ = window.jQuery = $;
-          fetch('http://localhost:5000/vehicle_data'+'/'+localStorage.getItem('id')).then((res) =>
+          fetch('http://35.154.229.254/vehicle_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsdata) => {
             for (let i = 0; i < jsdata.length; i++) {
               if(jsdata[i].veh_type.toString().trim() == "oil")
@@ -233,7 +233,7 @@ const OilsVehicleLists = () => {
       setledParChatId(chart_id);
       console.log(chart_id);
       console.log(row_id);
-      fetch('http://localhost:5000/ledger_account_data', { 
+      fetch('http://35.154.229.254/ledger_account_data', { 
         method: 'POST', 
         headers: {   'Accept': 'application/json',
           'Content-Type': 'application/json'  }, 
@@ -292,7 +292,7 @@ const OilsVehicleLists = () => {
     e.preventDefault();
     var row_id = $(this).attr("data-lable");
     setVehcileId(row_id);
-    fetch('http://localhost:5000/vehicle_delete/'+row_id+'/'+localStorage.getItem('id'), { 
+    fetch('http://35.154.229.254/vehicle_delete/'+row_id+'/'+localStorage.getItem('id'), { 
       method: 'DELETE', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 

@@ -26,7 +26,7 @@ const AccountTypeLists = () => {
     {
       if($("#btcnaccntubmit").text().trim() == "Save")
       {
-        fetch('http://localhost:5000/add_acconttype_values', { 
+        fetch('http://35.154.229.254/add_acconttype_values', { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -42,7 +42,7 @@ const AccountTypeLists = () => {
       }
       else if($("#btcnaccntubmit").text().trim() == "Update")
         {
-            fetch('http://localhost:5000/update_account_types_setup', { 
+            fetch('http://35.154.229.254/update_account_types_setup', { 
               method: 'POST', 
               headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  },
@@ -73,7 +73,7 @@ const AccountTypeLists = () => {
       $('#accnt_type_table').DataTable().destroy();
     }
     $('#accnt_type_table tbody').empty();
-    fetch('http://localhost:5000/account_type_data'+'/'+localStorage.getItem('id')).then((res) =>
+    fetch('http://35.154.229.254/account_type_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsdata) => {
        for (let i = 0; i < jsdata.length; i++) {
         
@@ -105,7 +105,7 @@ const AccountTypeLists = () => {
     loadJQueryAndDataTables()
       .then(($) => {
         window.$ = window.jQuery = $;
-        fetch('http://localhost:5000/account_type_data'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/account_type_data'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((jsdata) => {
            for (let i = 0; i < jsdata.length; i++) {
             let row = '<tr>';
@@ -158,7 +158,7 @@ const AccountTypeLists = () => {
     e.preventDefault();
     var row_id = $(this).attr("data-lable");
     setId(row_id);
-    fetch('http://localhost:5000/account_type_delete/'+row_id+'/'+localStorage.getItem('id'), { 
+    fetch('http://35.154.229.254/account_type_delete/'+row_id+'/'+localStorage.getItem('id'), { 
       method: 'DELETE', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 

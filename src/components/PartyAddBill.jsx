@@ -100,7 +100,7 @@ const PartyAddBill = () => {
         {
         if($("#btnpartybillsubmit").text().trim() == "Save")
           {
-          fetch('http://localhost:5000/add_party_bill', { 
+          fetch('http://35.154.229.254/add_party_bill', { 
             method: 'POST', 
             headers: {   'Accept': 'application/json',
               'Content-Type': 'application/json'  }, 
@@ -116,7 +116,7 @@ const PartyAddBill = () => {
         }
         else if($("#btnpartybillsubmit").text().trim() == "Update")
         {
-          fetch('http://localhost:5000/update_party_bill', { 
+          fetch('http://35.154.229.254/update_party_bill', { 
             method: 'POST', 
             headers: {   'Accept': 'application/json',
               'Content-Type': 'application/json'  }, 
@@ -149,7 +149,7 @@ const PartyAddBill = () => {
             $('#party_bill_table').DataTable().destroy();
           }
           $('#party_bill_table tbody').empty();
-          fetch("http://localhost:5000/party_bill_data/" + localStorage.getItem('id')).then((res) =>
+          fetch("http://35.154.229.254/party_bill_data/" + localStorage.getItem('id')).then((res) =>
             res.json().then((jsdata) => {
              for (let i = 0; i < jsdata.length; i++) {
               let row = '<tr>';
@@ -208,7 +208,7 @@ const PartyAddBill = () => {
       e.preventDefault();
        var row_id = $(this).attr("data-lable");
        setGBiltyId(row_id);
-       fetch('http://localhost:5000/party_bills_delete/'+row_id +'/'+localStorage.getItem('id'), { 
+       fetch('http://35.154.229.254/party_bills_delete/'+row_id +'/'+localStorage.getItem('id'), { 
          method: 'DELETE', 
          headers: { 'Content-Type': 'application/json', }, 
          body: JSON.stringify({})
@@ -224,12 +224,12 @@ const PartyAddBill = () => {
   useEffect(() => {
     var username = localStorage.getItem('username');
     if (username) {
-      fetch('http://localhost:5000/get_party_bill_billNo'+'/'+localStorage.getItem('id')).then((res) =>
+      fetch('http://35.154.229.254/get_party_bill_billNo'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsprovdata) => {
         setBiltyNo("PT_" +pad(parseInt(jsprovdata.data), 3) );
       }
       ));
-      fetch('http://localhost:5000/party_data'+'/'+localStorage.getItem('id')).then((res) =>
+      fetch('http://35.154.229.254/party_data'+'/'+localStorage.getItem('id')).then((res) =>
         res.json().then((data_party) => {
           $("#bill_party_1").empty();
           $("#bill_party_1").append("<option value=''>Select Party</option>");
@@ -242,7 +242,7 @@ const PartyAddBill = () => {
       loadJQueryAndDataTables()
         .then(($) => {
           window.$ = window.jQuery = $;
-          fetch('http://localhost:5000/party_bill_data'+'/'+localStorage.getItem('id')).then((res) =>
+          fetch('http://35.154.229.254/party_bill_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsdata) => {
             for (let i = 0; i < jsdata.length; i++) {
               let row = '<tr>';

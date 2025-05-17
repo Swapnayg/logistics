@@ -408,8 +408,9 @@ const ManifestEntryForm = () => {
     setBFreight(handleDecimalsOnValue(total_freight ));
     setBWRT4Freight(handleDecimalsOnValue(freightwrt4));
     setBComm(0);
-    setBvehicleFreight(0);
-    setBvehicleBal(0);
+    setBOtherCharges(0);
+    setBvehicleFreight(total_freight - freightwrt4);
+    setBvehicleBal(total_freight - freightwrt4);    
 }
 
 function handleChange2(e) {
@@ -427,8 +428,9 @@ function handleChange2(e) {
     setBFreight(handleDecimalsOnValue(total_freight ));
     setBWRT4Freight(handleDecimalsOnValue(freightwrt4));
     setBComm(0);
-    setBvehicleFreight(0);
-    setBvehicleBal(0);
+    setBOtherCharges(0);
+    setBvehicleFreight(total_freight - freightwrt4);
+    setBvehicleBal(total_freight - freightwrt4);
 }
 function handleChange6(e)
 {
@@ -476,61 +478,64 @@ function handleChange5(e)
   setBFreight(handleDecimalsOnValue(total_freight ));
   setBWRT4Freight(handleDecimalsOnValue(freightwrt4));
   setBComm(0);
-  setBvehicleFreight(0);
-  setBvehicleBal(0);
+  setBOtherCharges(0);
+  setBvehicleFreight(total_freight - freightwrt4);
+  setBvehicleBal(total_freight - freightwrt4);
 }
-
-function handleChange3(e) {
+function handleChange7(e) {
   e.preventDefault();
   if(e.target.value!= undefined || e.target.value!= null)
   {
     if(isNaN(handleDecimalsOnValue(e.target.value)))
     {       
-      setBvehicleFreight("");
-      setBComm(0);
-      setBvehicleBal("");
+      setBOtherCharges("");
+      setBvehicleFreight(BFreight - BComm - BWRT4Freight);
+      setBvehicleBal(BFreight - BComm - BWRT4Freight);
     }
     else{
-      setBvehicleFreight(handleDecimalsOnValue(e.target.value));
-      setBvehicleBal(handleDecimalsOnValue(e.target.value));
-        if((BFreight - e.target.value) > 0){
-          setBComm(handleDecimalsOnValue(BFreight - e.target.value));
+        setBOtherCharges(handleDecimalsOnValue(e.target.value));
+        var minus_Amt = BFreight - e.target.value - BComm - BWRT4Freight;
+        if((minus_Amt) > 0){
+            setBvehicleFreight(handleDecimalsOnValue(minus_Amt));
+            setBvehicleBal(handleDecimalsOnValue(minus_Amt));
         }
         else
         {
-          setBvehicleFreight("");
-          setBComm(0); 
-          setBvehicleBal("");
-        }
-      }
-  }
-}
-
-function handleChange4(e) {
-    e.preventDefault();
-    if(e.target.value!= undefined || e.target.value!= null)
-    {
-      if(isNaN(handleDecimalsOnValue(e.target.value)))
-      {       
-        setBComm("");
-        setBvehicleFreight(0);
-        setBvehicleBal(0);
-      }
-      else{
-          setBComm(handleDecimalsOnValue(e.target.value));
-          if((BFreight - e.target.value) > 0){
-              setBvehicleFreight(handleDecimalsOnValue(BFreight - e.target.value));
-              setBvehicleBal(handleDecimalsOnValue(BFreight - e.target.value));
-          }
-          else
-          {
-            setBComm("");
-            setBvehicleFreight(0);
-            setBvehicleBal(0);
-          }
+          setBOtherCharges("");
+          setBvehicleFreight(BFreight - BComm - BWRT4Freight);
+          setBvehicleBal(BFreight - BComm - BWRT4Freight);
         }
       }
     }
+}
+
+
+function handleChange4(e) {
+  e.preventDefault();
+  if(e.target.value!= undefined || e.target.value!= null)
+  {
+    if(isNaN(handleDecimalsOnValue(e.target.value)))
+    {       
+      setBComm("");
+      setBvehicleFreight(BFreight - BOtherCharges - BWRT4Freight);
+      setBvehicleBal(BFreight - BOtherCharges - BWRT4Freight);
+    }
+    else{
+        setBComm(handleDecimalsOnValue(e.target.value));
+        var minus_Amt = BFreight - e.target.value - BOtherCharges - BWRT4Freight;
+        if((minus_Amt) > 0){
+            setBvehicleFreight(handleDecimalsOnValue(minus_Amt));
+            setBvehicleBal(handleDecimalsOnValue(minus_Amt));
+        }
+        else
+        {
+          setBComm("");
+          setBvehicleFreight(BFreight - BOtherCharges - BWRT4Freight);
+          setBvehicleBal(BFreight - BOtherCharges - BWRT4Freight);
+        }
+      }
+    }
+  }
   return (
     <div>
     <div className="col-lg-12">
@@ -607,7 +612,7 @@ function handleChange4(e) {
              required />
           </div>
 
-          <div className="col-md-2">
+          <div className="col-md-2" hidden={true}>
         <label className="form-label">Tax Rate(%)</label>
         <input type="number" className="form-control" id="input_gst"
               value={Goods_GST}
@@ -644,7 +649,7 @@ function handleChange4(e) {
         <label className="form-label">Other Charges(Rs)*</label>
         <input type="number" className="form-control" 
           value={BOtherCharges}
-          onChange={(e) => setBOtherCharges(e.target.value)}
+          onChange={handleChange7}
           onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault();}}
         required />
       </div>
@@ -652,9 +657,8 @@ function handleChange4(e) {
         <label className="form-label">Vehicle Freight (Rs) *</label>
         <input type="number" className="form-control" 
           value={BvehicleFreight}
-          onChange= {handleChange3}
           onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault();}}
-         required />
+         required readOnly/>
       </div>
       <div className="col-md-2">
         <label className="form-label">Advance To Vehicle (Rs)</label>

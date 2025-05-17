@@ -27,7 +27,7 @@ const ManageCustGroupList = () => {
     {
       if($("#btngroupsubmit").text().trim() == "Save")
       {
-        fetch('http://localhost:5000/add_cust_group_values', { 
+        fetch('http://35.154.229.254/add_cust_group_values', { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -43,7 +43,7 @@ const ManageCustGroupList = () => {
       }
       else if($("#btngroupsubmit").text().trim() == "Update")
         {
-            fetch('http://localhost:5000/update_c_group_setup', { 
+            fetch('http://35.154.229.254/update_c_group_setup', { 
               method: 'POST', 
               headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  },
@@ -74,7 +74,7 @@ const ManageCustGroupList = () => {
       $('#c_group_table').DataTable().destroy();
     }
     $('#c_group_table tbody').empty();
-    fetch('http://localhost:5000/c_group_data'+'/'+localStorage.getItem('id')).then((res) =>
+    fetch('http://35.154.229.254/c_group_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsdata) => {
        for (let i = 0; i < jsdata.length; i++) {
         let row = '<tr>';
@@ -97,7 +97,7 @@ const ManageCustGroupList = () => {
     loadJQueryAndDataTables()
       .then(($) => {
         window.$ = window.jQuery = $;
-        fetch('http://localhost:5000/c_group_data'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/c_group_data'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((jsdata) => {
            for (let i = 0; i < jsdata.length; i++) {
             let row = '<tr>';
@@ -143,7 +143,7 @@ const ManageCustGroupList = () => {
   $(document).off('click', '.c_grp_delete').on("click", '.c_grp_delete', function(e){
       e.preventDefault();
       var row_id = $(this).attr("data-lable");
-    fetch('http://localhost:5000/C_group_delete/'+row_id+'/'+localStorage.getItem('id'), { 
+    fetch('http://35.154.229.254/C_group_delete/'+row_id+'/'+localStorage.getItem('id'), { 
       method: 'DELETE', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 

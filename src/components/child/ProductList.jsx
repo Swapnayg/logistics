@@ -35,7 +35,7 @@ const ProductList = () => {
     {
       if($("#btcnprodsubmit").text().trim() == "Save")
       {
-        fetch('http://localhost:5000/add_product_values', { 
+        fetch('http://35.154.229.254/add_product_values', { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -74,7 +74,7 @@ const ProductList = () => {
       let table;
       $("#prod_category").empty();  
       $("#prod_category").append("<option value=''>Select Category</option>");
-      fetch('http://localhost:5000/p_category_data'+'/'+localStorage.getItem('id')).then((res) =>
+      fetch('http://35.154.229.254/p_category_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsprovdata) => {
               for (let i = 0; i < jsprovdata.length; i++) {
                 $("#prod_category").append("<option value=\"" + jsprovdata[i].id  + "\">" + jsprovdata[i].cat_name + "</option>");
@@ -83,7 +83,7 @@ const ProductList = () => {
 
       $("#prod_unit").empty();
       $("#prod_unit").append("<option value=''>Select Warehouse</option>");
-      fetch('http://localhost:5000/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
+      fetch('http://35.154.229.254/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
         res.json().then((jsprovdata) => {
           for (let i = 0; i < jsprovdata.length; i++) {
             $("#prod_unit").append("<option value=\"" + jsprovdata[i].id  + "\">" + jsprovdata[i].ware_name + "</option>");

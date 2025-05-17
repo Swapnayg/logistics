@@ -20,7 +20,7 @@ const SignInLayer = () => {
     e.preventDefault();
     if(canSubmit)
     {
-      fetch('http://localhost:5000/login', { 
+      fetch('http://35.154.229.254/login', { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 

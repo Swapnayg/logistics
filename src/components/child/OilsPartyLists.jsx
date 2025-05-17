@@ -32,7 +32,7 @@ const OilsPartyLists = () => {
 
 const handlePrint = (e) => {
   var party_type = 'party';
-  fetch('http://localhost:5000/generate_pdf/'+party_type+'/'+l_partyId+'/'+localStorage.getItem('id'))
+  fetch('http://35.154.229.254/generate_pdf/'+party_type+'/'+l_partyId+'/'+localStorage.getItem('id'))
   .then(resp => resp.blob())
   .then(blob => {
     const url = window.URL.createObjectURL(blob);
@@ -91,7 +91,7 @@ const handleBack = (e) => {
     {
       if($("#btnpartysubmit").text().trim() == "Save")
       {
-        fetch('http://localhost:5000/add_party', { 
+        fetch('http://35.154.229.254/add_party', { 
           method: 'POST', 
           headers: { 'Content-Type': 'application/json', }, 
           body: JSON.stringify({userid:localStorage.getItem('id'), party: partyName, p_type: 'oil', p_contactPerson: contactPerson, p_phoneNo: phoneNo})
@@ -118,7 +118,7 @@ const handleBack = (e) => {
       }
       else if($("#btnpartysubmit").text().trim() == "Update")
       {
-          fetch('http://localhost:5000/update_party', { 
+          fetch('http://35.154.229.254/update_party', { 
             method: 'POST', 
             headers: { 'Content-Type': 'application/json', }, 
             body: JSON.stringify({userid:localStorage.getItem('id'), party_id:partyId, party: partyName, p_type: 'oil', p_contactPerson: contactPerson, p_phoneNo: phoneNo})
@@ -150,7 +150,7 @@ const handleBack = (e) => {
       $('#party_table').DataTable().destroy();
     }
     $('#party_table tbody').empty();
-    fetch('http://localhost:5000/party_data'+'/'+localStorage.getItem('id')).then((res) =>
+    fetch('http://35.154.229.254/party_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsdata) => {
        for (let i = 0; i < jsdata.length; i++) {
         if(jsdata[i].type.toString().trim() == "oil")
@@ -178,7 +178,7 @@ const handleBack = (e) => {
       loadJQueryAndDataTables()
         .then(($) => {
           window.$ = window.jQuery = $;
-          fetch('http://localhost:5000/party_data'+'/'+localStorage.getItem('id')).then((res) =>
+          fetch('http://35.154.229.254/party_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsdata) => {
             for (let i = 0; i < jsdata.length; i++) {
               if(jsdata[i].type.toString().trim() == "oil")
@@ -223,7 +223,7 @@ const handleBack = (e) => {
     setHiddenmain(true);
     setledPartId(row_id);
     setledParChatId(chart_id);
-    fetch('http://localhost:5000/ledger_account_data', { 
+    fetch('http://35.154.229.254/ledger_account_data', { 
       method: 'POST', 
       headers: {   'Accept': 'application/json',
         'Content-Type': 'application/json'  }, 
@@ -278,7 +278,7 @@ const handleBack = (e) => {
     e.preventDefault();
     var row_id = $(this).attr("data-lable");
     setId(row_id);
-    fetch('http://localhost:5000/party_delete/'+row_id+'/'+localStorage.getItem('id'), { 
+    fetch('http://35.154.229.254/party_delete/'+row_id+'/'+localStorage.getItem('id'), { 
       method: 'DELETE', 
       headers: { 'Content-Type': 'application/json', }, 
       body: JSON.stringify({})

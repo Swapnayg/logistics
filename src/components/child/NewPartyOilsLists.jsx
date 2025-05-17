@@ -54,7 +54,7 @@ const NewPartyOilsLists = () => {
     e.preventDefault();
     if(canSubmit)
     {
-        fetch('http://localhost:5000/add_party_bill', { 
+        fetch('http://35.154.229.254/add_party_bill', { 
           method: 'POST', 
           headers: { 'Content-Type': 'application/json', }, 
           body: JSON.stringify({userid:localStorage.getItem('id'),pb_invoiceNo:invoiceNo, pb_issueDate: issueDate, pb_dueDate: dueDate, pb_partyid: partyid, pb_invoiceParty: invoiceParty, pb_salesName: salesName, pb_thankMssg:thankMssg, pb_subTotal: subTotal,pb_select_bilty:selectList.toString().trim(),pb_status:"posted" , pb_type:"oil"})
@@ -83,7 +83,7 @@ const NewPartyOilsLists = () => {
     if(invoiceParty != 0) 
     {
       let rows = '';
-      fetch('http://localhost:5000/mainifest_oil_data', { 
+      fetch('http://35.154.229.254/mainifest_oil_data', { 
         method: 'POST', 
         headers: { 'Content-Type': 'application/json', }, 
         body: JSON.stringify({party_id: partyid, userid:localStorage.getItem('id')})
@@ -220,12 +220,12 @@ const NewPartyOilsLists = () => {
     var username = localStorage.getItem('username');
     if (username) {
       let table;
-      fetch('http://localhost:5000/get_party_bill_billNo'+'/'+localStorage.getItem('id')).then((res) =>
+      fetch('http://35.154.229.254/get_party_bill_billNo'+'/'+localStorage.getItem('id')).then((res) =>
         res.json().then((jsprovdata) => {
           setinvoiceNo("PBO" + pad(parseInt(jsprovdata.data), 4));
         }
       ));
-       fetch('http://localhost:5000/party_data'+'/'+localStorage.getItem('id')).then((res) =>
+       fetch('http://35.154.229.254/party_data'+'/'+localStorage.getItem('id')).then((res) =>
         res.json().then((data_party) => {
         $("#party_bill").empty();
         $("#party_bill").append("<option value=''>Select Party</option>");

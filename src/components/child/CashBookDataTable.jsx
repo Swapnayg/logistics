@@ -58,7 +58,7 @@ const CashBookDataTable = () => {
         $('#table_cashbook').DataTable().destroy();
       }
       $('#table_cashbook tbody').empty();
-      fetch('http://localhost:5000/cashbook_data'+'/'+localStorage.getItem('id')).then((res) =>
+      fetch('http://35.154.229.254/cashbook_data'+'/'+localStorage.getItem('id')).then((res) =>
         res.json().then((jsdata) => {
           if(e.target.value.toString().trim()  =="general" || e.target.value.toString().trim()  =="commission" || e.target.value.toString().trim()  =="party"|| e.target.value.toString().trim()  =="vehicle")
           {
@@ -164,7 +164,7 @@ const CashBookDataTable = () => {
         setHidden(false);
         $("#bill_number").empty();
         $("#bill_number").append("<option value=''>Select Bill</option>");
-        fetch("http://localhost:5000/COA_data_bill", {
+        fetch("http://35.154.229.254/COA_data_bill", {
           method: 'POST', 
           headers:{   'Accept': 'application/json',
                     'Content-Type': 'application/json'  }, 
@@ -184,7 +184,7 @@ const CashBookDataTable = () => {
 
     
     const loadOptions = (inputValue) =>{
-      return fetch("http://localhost:5000/COA_data_select",{
+      return fetch("http://35.154.229.254/COA_data_select",{
         method: 'POST', 
         headers:{   'Accept': 'application/json',
                   'Content-Type': 'application/json'  }, 
@@ -229,7 +229,7 @@ const CashBookDataTable = () => {
         {
           debit_amnt = amount;
         }
-        fetch('http://localhost:5000/add_cashbook_values', { 
+        fetch('http://35.154.229.254/add_cashbook_values', { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -262,7 +262,7 @@ const CashBookDataTable = () => {
         var u_bill_no = array_list.ledger_bill.toString().trim();
         var row_id = $(this).attr("data-lable");
         var row_type = $(this).attr("data-type");
-          fetch('http://localhost:5000/update_cashbook_values', { 
+          fetch('http://35.154.229.254/update_cashbook_values', { 
               method: 'POST', 
               headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  },
@@ -344,7 +344,7 @@ const CashBookDataTable = () => {
         var t_row =  $(this).closest('tr').index();
         setId(row_id);
         var array_list =  JSON.parse($("#table_cashbook tbody tr:eq("+t_row+") td:eq(7)").find('span').text());
-        fetch('http://localhost:5000/cashbook_delete', { 
+        fetch('http://35.154.229.254/cashbook_delete', { 
           method: 'POST', 
           headers:{   'Accept': 'application/json',
                     'Content-Type': 'application/json'  }, 
@@ -368,7 +368,7 @@ const CashBookDataTable = () => {
             $('#table_cashbook').DataTable().destroy();
           }
           $('#table_cashbook tbody').empty();
-          fetch('http://localhost:5000/cashbook_data'+'/'+localStorage.getItem('id')).then((res) =>
+          fetch('http://35.154.229.254/cashbook_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsdata) => {
               for (let i = 0; i < jsdata.cashbook_data.length; i++) {
                 if(jsdata.cashbook_data[i].pay_start.toString().trim() != "started")
@@ -422,7 +422,7 @@ const CashBookDataTable = () => {
             $('#table_cashbook').DataTable().destroy();
           }
           $('#table_cashbook tbody').empty();
-          fetch('http://localhost:5000/cashbook_data'+'/'+localStorage.getItem('id')).then((res) =>
+          fetch('http://35.154.229.254/cashbook_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsdata) => {
               for (let i = 0; i < jsdata.cashbook_data.length; i++) {
                 if(jsdata.cashbook_data[i].pay_start.toString().trim() != "started")
@@ -484,7 +484,7 @@ const CashBookDataTable = () => {
             loadJQueryAndDataTables()
               .then(($) => {
                 window.$ = window.jQuery = $;
-                fetch('http://localhost:5000/cashbook_data'+'/'+localStorage.getItem('id')).then((res) =>
+                fetch('http://35.154.229.254/cashbook_data'+'/'+localStorage.getItem('id')).then((res) =>
                   res.json().then((jsdata) => {
                     for (let i = 0; i < jsdata.cashbook_data.length; i++) {
                       if(jsdata.cashbook_data[i].pay_start.toString().trim() != "started")

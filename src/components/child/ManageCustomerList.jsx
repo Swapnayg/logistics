@@ -83,7 +83,7 @@ const ManageCustomerList = () => {
 
 const handlePrint = (e) => {
   var party_type = 'client';
-  fetch('http://localhost:5000/generate_pdf/'+party_type+'/'+l_partyId+'/'+localStorage.getItem('id'))
+  fetch('http://35.154.229.254/generate_pdf/'+party_type+'/'+l_partyId+'/'+localStorage.getItem('id'))
   .then(resp => resp.blob())
   .then(blob => {
     const url = window.URL.createObjectURL(blob);
@@ -144,7 +144,7 @@ const handleBack = (e) => {
     {
       if($("#btncustmubmit").text().trim() == "Update")
         {
-            fetch('http://localhost:5000/update_customer_setup', { 
+            fetch('http://35.154.229.254/update_customer_setup', { 
               method: 'POST', 
               headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  },
@@ -199,7 +199,7 @@ const handleBack = (e) => {
       $('#customer_table').DataTable().destroy();
     }
     $('#customer_table tbody').empty();
-    fetch('http://localhost:5000/customer_data'+'/'+localStorage.getItem('id')).then((res) =>
+    fetch('http://35.154.229.254/customer_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsdata) => {
        for (let i = 0; i < jsdata.length; i++) {
         let row = '<tr>';
@@ -227,7 +227,7 @@ const handleBack = (e) => {
       setleghidden(false);
       setledCustId(row_id);
       setledChartId(chart_id);
-      fetch('http://localhost:5000/ledger_account_data', { 
+      fetch('http://35.154.229.254/ledger_account_data', { 
         method: 'POST', 
         headers: {   'Accept': 'application/json',
           'Content-Type': 'application/json'  }, 
@@ -325,7 +325,7 @@ const handleBack = (e) => {
     let table;
          $("#prod_category").empty();
          $("#prod_category").append("<option value=''>Select Category</option>");
-         fetch('http://localhost:5000/p_category_data'+'/'+localStorage.getItem('id')).then((res) =>
+         fetch('http://35.154.229.254/p_category_data'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((jsprovdata) => {
             for (let i = 0; i < jsprovdata.length; i++) {
               $("#prod_category").append("<option value=\"" + jsprovdata[i].id  + "\">" + jsprovdata[i].cat_name + "</option>");
@@ -335,7 +335,7 @@ const handleBack = (e) => {
     loadJQueryAndDataTables()
       .then(($) => {
         window.$ = window.jQuery = $;
-        fetch('http://localhost:5000/customer_data'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/customer_data'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((jsdata) => {
            for (let i = 0; i < jsdata.length; i++) {
             let row = '<tr>';
@@ -409,7 +409,7 @@ const handleBack = (e) => {
     e.preventDefault();
     var row_id = $(this).attr("data-lable");
     setId(row_id);
-    fetch('http://localhost:5000/customer_delete/'+row_id+'/'+localStorage.getItem('id'), { 
+    fetch('http://35.154.229.254/customer_delete/'+row_id+'/'+localStorage.getItem('id'), { 
       method: 'DELETE', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 

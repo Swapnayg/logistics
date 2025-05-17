@@ -47,7 +47,7 @@ function numberWithCommas(x) {
 
 const handleIncomeExp = (e) => {
    e.preventDefault();
-   fetch("http://localhost:5000/main_area_data",{method: 'POST', 
+   fetch("http://35.154.229.254/main_area_data",{method: 'POST', 
       headers: {   'Accept': 'application/json',
         'Content-Type': 'application/json'  }, 
         body: JSON.stringify({"overallType":e.target.value, userid:localStorage.getItem('id')})
@@ -116,7 +116,7 @@ const [candleoptions, setcandleoptions] = useState({
 
 const handleOverall = (e) => {
    e.preventDefault();
-   fetch("http://localhost:5000/main_overall_data",{method: 'POST', 
+   fetch("http://35.154.229.254/main_overall_data",{method: 'POST', 
       headers: {   'Accept': 'application/json',
         'Content-Type': 'application/json'  }, 
         body: JSON.stringify({"overallType":e.target.value, userid:localStorage.getItem('id')})
@@ -204,7 +204,7 @@ function addProgressBar(stk, alert, perc) {
  useEffect(() => {
   var username = localStorage.getItem('username');
   if (username) {
-     fetch("http://localhost:5000/main_overall_data",{method: 'POST', 
+     fetch("http://35.154.229.254/main_overall_data",{method: 'POST', 
          headers: {   'Accept': 'application/json',
          'Content-Type': 'application/json'  }, 
          body: JSON.stringify({"overallType":'year', userid:localStorage.getItem('id')})
@@ -212,7 +212,7 @@ function addProgressBar(stk, alert, perc) {
          res.json().then((jsprovdata) => {
          setdoNutseriesData([parseInt(jsprovdata.cm_total_revenue), parseInt(jsprovdata.cm_total_expense), parseInt(jsprovdata.cm_total_income)]);
       }));
-    fetch("http://localhost:5000/main_area_data",{method: 'POST', 
+    fetch("http://35.154.229.254/main_area_data",{method: 'POST', 
          headers: {   'Accept': 'application/json',
          'Content-Type': 'application/json'  }, 
          body: JSON.stringify({"overallType":'year', userid:localStorage.getItem('id') })
@@ -231,7 +231,7 @@ function addProgressBar(stk, alert, perc) {
             },
          ]);
       }));   
-    fetch('http://localhost:5000/main_dashboard_data'+'/'+localStorage.getItem('id')).then((res) =>
+    fetch('http://35.154.229.254/main_dashboard_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsprovdata) => {
         settotalRevenue(numberWithCommas(jsprovdata.cm_total_revenue));
         setperTotalRevenue(jsprovdata.total_rev_diff.toString().trim().replace("-",""));

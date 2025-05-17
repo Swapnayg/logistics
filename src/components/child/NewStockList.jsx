@@ -90,7 +90,7 @@ const NewStockList = () => {
   const handleChange = (option) => {
     setSelectedOption(option);
     var sel_value = option.value.toString().trim();
-    fetch("http://localhost:5000/supplier_details", {
+    fetch("http://35.154.229.254/supplier_details", {
       method: 'POST', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 
@@ -111,7 +111,7 @@ const NewStockList = () => {
   const handleChangeCus = (option) => {
     setcusselectedOption(option);
     var sel_value = option.value.toString().trim();
-    fetch("http://localhost:5000/clients_details", {
+    fetch("http://35.154.229.254/clients_details", {
       method: 'POST', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 
@@ -347,7 +347,7 @@ const handleAddItem = (e) => {
   if(Warehouse != 0) 
   {
     let rows = '';
-    fetch('http://localhost:5000/product_data', { 
+    fetch('http://35.154.229.254/product_data', { 
       method: 'POST', 
       headers: { 'Content-Type': 'application/json', }, 
       body: JSON.stringify({warehouse_id: Warehouse, userid:localStorage.getItem('id')})}).then(res => {
@@ -568,7 +568,7 @@ const handleAddItem = (e) => {
         {
           selectvalue = cusselectedOption.value.toString().trim();
         }
-          fetch('http://localhost:5000/add_stock_return_values', { 
+          fetch('http://35.154.229.254/add_stock_return_values', { 
             method: 'POST', 
             headers: {   'Accept': 'application/json',
               'Content-Type': 'application/json'  }, 
@@ -665,7 +665,7 @@ const handleDiscountChange = (e) => {
       var username = localStorage.getItem('username');
       if (username) {
         let table;
-        const response =  fetch("http://localhost:5000/supplier_select",{
+        const response =  fetch("http://35.154.229.254/supplier_select",{
           method: 'POST', 
           headers:{ 'Accept': 'application/json',
                     'Content-Type': 'application/json'  }, 
@@ -685,7 +685,7 @@ const handleDiscountChange = (e) => {
         setOptions(formattedoptions);
       }));
         
-      const responseCus =  fetch("http://localhost:5000/customer_select",{
+      const responseCus =  fetch("http://35.154.229.254/customer_select",{
         method: 'POST', 
         headers:{ 'Accept': 'application/json',
                   'Content-Type': 'application/json'  }, 
@@ -705,18 +705,18 @@ const handleDiscountChange = (e) => {
       setcusoptions(formattedoptions);
     }));
 
-        fetch('http://localhost:5000/get_stk_return_invNo'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/get_stk_return_invNo'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((jsprovdata) => {
             setOInvoiceNo("STK_" + pad(parseInt(jsprovdata.data), 4) );
             setstkId("STK_" + pad(parseInt(jsprovdata.data), 4) );
           }
         )); 
-        fetch('http://localhost:5000/get_cust_rtn_invNo'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/get_cust_rtn_invNo'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((jsprovdata1) => {
             setcusId("CUST_" + pad(parseInt(jsprovdata1.data), 4) );
           }
         )); 
-        fetch('http://localhost:5000/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((data_party) => {
           $("#order_ware").empty();
           $("#order_ware").append("<option value=''>Select Warehouse</option>");

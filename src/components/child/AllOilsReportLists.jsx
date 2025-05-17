@@ -28,7 +28,7 @@ const AllOilsReportLists = () => {
       $('#table_all_party').DataTable().destroy();
     }
     $('#table_all_party tbody').empty();
-    fetch("http://localhost:5000/get_goods_oils_data", { 
+    fetch("http://35.154.229.254/get_goods_oils_data", { 
       method: 'POST', 
       headers: {   'Accept': 'application/json',
         'Content-Type': 'application/json'  }, 
@@ -87,7 +87,7 @@ const AllOilsReportLists = () => {
   }
    const handlePrint = (e) => {
      var cust_Name = "All Oils Report";
-     fetch('http://localhost:5000/generateAllGoodsOilsReport_pdf', { 
+     fetch('http://35.154.229.254/generateAllGoodsOilsReport_pdf', { 
        method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -140,7 +140,7 @@ const AllOilsReportLists = () => {
       loadJQueryAndDataTables()
       .then(($) => {
         window.$ = window.jQuery = $;
-        fetch("http://localhost:5000/get_goods_oils_data", { 
+        fetch("http://35.154.229.254/get_goods_oils_data", { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 

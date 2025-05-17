@@ -84,7 +84,7 @@ const ManageQuoteList = () => {
       $('#quote_table').DataTable().destroy();
     }
     $('#quote_table tbody').empty();
-    fetch('http://localhost:5000/quote_invoice_data'+'/'+localStorage.getItem('id')).then((res) =>
+    fetch('http://35.154.229.254/quote_invoice_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsdata) => {
        for (let i = 0; i < jsdata.length; i++) {
         let row = '<tr>';
@@ -118,7 +118,7 @@ const ManageQuoteList = () => {
     var username = localStorage.getItem('username');
     if (username) {
       let table;
-      fetch('http://localhost:5000/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
+      fetch('http://35.154.229.254/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
         res.json().then((data_party) => {
         $("#order_ware").empty();
         $("#order_ware").append("<option value=''>Select Warehouse</option>");
@@ -129,7 +129,7 @@ const ManageQuoteList = () => {
         loadJQueryAndDataTables()
         .then(($) => {
           window.$ = window.jQuery = $;
-          fetch('http://localhost:5000/quote_invoice_data'+'/'+localStorage.getItem('id')).then((res) =>
+          fetch('http://35.154.229.254/quote_invoice_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsdata) => {
             for (let i = 0; i < jsdata.length; i++) {
                   let row = '<tr>';
@@ -174,7 +174,7 @@ const ManageQuoteList = () => {
 
   const handleDownload = (e) => {
     var type = "quote";
-    fetch('http://localhost:5000/generatePrd_pdf/'+v_Inv_Id+'/'+type+'/'+localStorage.getItem('id'))
+    fetch('http://35.154.229.254/generatePrd_pdf/'+v_Inv_Id+'/'+type+'/'+localStorage.getItem('id'))
     .then(resp => resp.blob())
     .then(blob => {
       const url = window.URL.createObjectURL(blob);
@@ -414,7 +414,7 @@ const ManageQuoteList = () => {
   
     const handleAddItem = (e) => {
       let rows = '';
-      fetch('http://localhost:5000/product_data'+'/'+localStorage.getItem('id')).then(res => {
+      fetch('http://35.154.229.254/product_data'+'/'+localStorage.getItem('id')).then(res => {
           return res.json();
         }).then(data => {
           for (let i = 0; i < data.length; i++) {
@@ -612,7 +612,7 @@ const ManageQuoteList = () => {
             ord_items.push({"product":product.toString().trim(),"name":name.toString().trim(),"qty":qty.toString().trim(),"rate":rate.toString().trim(),"item_tax":item_tax.toString().trim(),"tax_amt":tax_amt.toString().trim(),"item_discount":item_discount.toString().trim(),"dis_amt":dis_amt.toString().trim(),"total_amt":total_amt.toString().trim(),"invoice_num":invoice_num.toString().trim(),"description":description.toString().trim()})
          });
   
-          fetch('http://localhost:5000/update_quote_invoice', { 
+          fetch('http://35.154.229.254/update_quote_invoice', { 
             method: 'POST', 
             headers: {   'Accept': 'application/json',
               'Content-Type': 'application/json'  }, 
@@ -693,7 +693,7 @@ const ManageQuoteList = () => {
     setedithidden(true);
     $('#tbl_view_order tbody').empty();
       var row_id = $(this).attr("data-lable");
-      fetch('http://localhost:5000/get_quote_invoice_data', { 
+      fetch('http://35.154.229.254/get_quote_invoice_data', { 
         method: 'POST', 
         headers: { 'Content-Type': 'application/json', }, 
         body: JSON.stringify({userid:localStorage.getItem('id'), quote_id: row_id})
@@ -741,7 +741,7 @@ const ManageQuoteList = () => {
     setedithidden(false);
     $('#add_item_table tbody').empty();
     var row_id = $(this).attr("data-lable");
-    fetch('http://localhost:5000/get_quote_invoice_data', { 
+    fetch('http://35.154.229.254/get_quote_invoice_data', { 
       method: 'POST', 
       headers: { 'Content-Type': 'application/json', }, 
       body: JSON.stringify({userid:localStorage.getItem('id'), quote_id: row_id})
@@ -802,7 +802,7 @@ const ManageQuoteList = () => {
     e.preventDefault();
     var row_id = $(this).attr("data-lable");
     setId(row_id);
-    fetch('http://localhost:5000/quote_inv_delete/'+row_id+'/'+localStorage.getItem('id'), { 
+    fetch('http://35.154.229.254/quote_inv_delete/'+row_id+'/'+localStorage.getItem('id'), { 
       method: 'DELETE', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 

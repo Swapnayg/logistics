@@ -51,7 +51,7 @@ const NewInvoiceList = () => {
   const [selectList, setselectList] = useState();
 
   const loadOptions = (inputValue) =>{
-    return fetch("http://localhost:5000/client_select",{
+    return fetch("http://35.154.229.254/client_select",{
       method: 'POST', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 
@@ -77,7 +77,7 @@ const NewInvoiceList = () => {
   const handleChange = (option) => {
     setSelectedOption(option);
     var sel_value = option.value.toString().trim();
-    fetch("http://localhost:5000/client_details", {
+    fetch("http://35.154.229.254/client_details", {
       method: 'POST', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 
@@ -316,7 +316,7 @@ const handleAddItem = (e) => {
   if(Warehouse != 0) 
   {
     let rows = '';
-    fetch('http://localhost:5000/product_data', { 
+    fetch('http://35.154.229.254/product_data', { 
       method: 'POST', 
       headers: { 'Content-Type': 'application/json', }, 
       body: JSON.stringify({warehouse_id: Warehouse, userid:localStorage.getItem('id')})}).then(res => {
@@ -527,7 +527,7 @@ const handleAddItem = (e) => {
           ord_items.push({"product":product.toString().trim(),"name":name.toString().trim(),"qty":qty.toString().trim(),"rate":rate.toString().trim(),"item_tax":item_tax.toString().trim(),"tax_amt":tax_amt.toString().trim(),"item_discount":item_discount.toString().trim(),"dis_amt":dis_amt.toString().trim(),"total_amt":total_amt.toString().trim(),"invoice_num":invoice_num.toString().trim(),"description":description.toString().trim()})
        });
 
-        fetch('http://localhost:5000/add_invoice_values', { 
+        fetch('http://35.154.229.254/add_invoice_values', { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -608,12 +608,12 @@ const handleDiscountChange = (e) => {
       var username = localStorage.getItem('username');
       if (username) {
         let table;
-        fetch('http://localhost:5000/get_invoice_invNo'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/get_invoice_invNo'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((jsprovdata) => {
             setOInvoiceNo("INV_" + pad(parseInt(jsprovdata.data), 4) );
           }
         )); 
-        fetch('http://localhost:5000/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((data_party) => {
           $("#order_ware").empty();
           $("#order_ware").append("<option value=''>Select Warehouse</option>");

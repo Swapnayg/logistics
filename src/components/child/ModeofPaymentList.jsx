@@ -27,7 +27,7 @@ const ModeofPayList = () => {
     {
       if($("#btnmodesubmit").text().trim() == "Save")
       {
-        fetch('http://localhost:5000/add_mode_pay', { 
+        fetch('http://35.154.229.254/add_mode_pay', { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -43,7 +43,7 @@ const ModeofPayList = () => {
       }
       else if($("#btnmodesubmit").text().trim() == "Update")
         {
-            fetch('http://localhost:5000/update_mode_of_pay', { 
+            fetch('http://35.154.229.254/update_mode_of_pay', { 
               method: 'POST', 
               headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  },
@@ -75,7 +75,7 @@ const ModeofPayList = () => {
       $('#mode_pay_table').DataTable().destroy();
     }
     $('#mode_pay_table tbody').empty();
-    fetch('http://localhost:5000/mode_of_pay_data'+'/'+localStorage.getItem('id')).then((res) =>
+    fetch('http://35.154.229.254/mode_of_pay_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsdata) => {
        for (let i = 0; i < jsdata.length; i++) {
         let row = '<tr>';
@@ -99,7 +99,7 @@ const ModeofPayList = () => {
       loadJQueryAndDataTables()
         .then(($) => {
           window.$ = window.jQuery = $;
-          fetch('http://localhost:5000/mode_of_pay_data'+'/'+localStorage.getItem('id')).then((res) =>
+          fetch('http://35.154.229.254/mode_of_pay_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsdata) => {
             for (let i = 0; i < jsdata.length; i++) {
               let row = '<tr>';
@@ -148,7 +148,7 @@ const ModeofPayList = () => {
     e.preventDefault();
     var row_id = $(this).attr("data-lable");
     setId(row_id);
-    fetch('http://localhost:5000/mode_of_pay_delete/'+row_id+'/'+localStorage.getItem('id'), { 
+    fetch('http://35.154.229.254/mode_of_pay_delete/'+row_id+'/'+localStorage.getItem('id'), { 
       method: 'DELETE', 
       headers: { 'Content-province': 'application/json', }, 
       body: JSON.stringify({})

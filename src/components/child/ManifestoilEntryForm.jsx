@@ -277,8 +277,9 @@ function handleChange5(e)
   setO_BFreight(handleDecimalsOnValue(total_freight ));
   setO_BWRT4Freight(handleDecimalsOnValue(freightwrt4));
   setO_BComm(0);
-  setO_BVehicleFreight(0);
-  setO_BVehicleBal(0);
+  setO_BVehicleFreight(total_freight - freightwrt4);
+  setO_BVehicleBal(total_freight - freightwrt4);
+  setO_BOtherCharges(0);
 }
 
 function handleChange(e) {
@@ -296,8 +297,9 @@ function handleChange(e) {
   setO_BFreight(handleDecimalsOnValue(total_freight ));
   setO_BWRT4Freight(handleDecimalsOnValue(freightwrt4));
   setO_BComm("");
-  setO_BVehicleFreight("");
-  setO_BVehicleBal(0);
+  setO_BVehicleFreight(total_freight - freightwrt4);
+  setO_BVehicleBal(total_freight - freightwrt4);
+  setO_BOtherCharges(0);
 }
 function handleChange2(e) {
   e.preventDefault();
@@ -315,33 +317,36 @@ function handleChange2(e) {
     setO_BFreight(handleDecimalsOnValue(total_freight ));
     setO_BWRT4Freight(handleDecimalsOnValue(freightwrt4));
     setO_BComm("");
-    setO_BVehicleFreight("");
-    setO_BVehicleBal(0);
+    setO_BVehicleFreight(total_freight - freightwrt4);
+    setO_BVehicleBal(total_freight - freightwrt4);
+    setO_BOtherCharges(0);
   }
-function handleChange3(e) {
+function handleChange7(e) {
   e.preventDefault();
+
   if(e.target.value!= undefined || e.target.value!= null)
   {
     if(isNaN(handleDecimalsOnValue(e.target.value)))
     {       
-      setO_BVehicleFreight("");
-      setO_BComm(0);
-      setO_BVehicleBal("");
+        setO_BOtherCharges("");
+        setO_BVehicleFreight(O_BFreight - O_BComm - O_BWRT4Freight);
+        setO_BVehicleBal(O_BFreight - O_BComm - O_BWRT4Freight);
     }
     else{
-        setO_BVehicleFreight(handleDecimalsOnValue(e.target.value));
-        setO_BVehicleBal(handleDecimalsOnValue(e.target.value));
-        if((O_BFreight - e.target.value) > 0){
-          setO_BComm(handleDecimalsOnValue(O_BFreight - e.target.value));
+        setO_BOtherCharges(handleDecimalsOnValue(e.target.value));
+        var minus_Amt = O_BFreight - e.target.value - O_BComm - O_BWRT4Freight;
+        if((minus_Amt) > 0){
+          setO_BVehicleFreight(handleDecimalsOnValue(minus_Amt));
+          setO_BVehicleBal(handleDecimalsOnValue(minus_Amt));
         }
         else
         {
-          setO_BVehicleFreight("");
-          setO_BComm(0);
-          setO_BVehicleBal("");
+          setO_BOtherCharges("");
+          setO_BVehicleFreight(O_BFreight - O_BComm - O_BWRT4Freight);
+          setO_BVehicleBal(O_BFreight - O_BComm - O_BWRT4Freight);
         }
       }
-  }
+    }
 }
 
 function handleChange4(e) {
@@ -351,20 +356,21 @@ function handleChange4(e) {
     if(isNaN(handleDecimalsOnValue(e.target.value)))
     {       
         setO_BComm("");
-        setO_BVehicleFreight(0);
-        setO_BVehicleBal(0);
+        setO_BVehicleFreight(O_BFreight - O_BOtherCharges - O_BWRT4Freight);
+        setO_BVehicleBal(O_BFreight - O_BOtherCharges - O_BWRT4Freight);
     }
     else{
         setO_BComm(handleDecimalsOnValue(e.target.value));
-        if((O_BFreight - e.target.value) > 0){
-          setO_BVehicleFreight(handleDecimalsOnValue(O_BFreight - e.target.value));
-          setO_BVehicleBal(handleDecimalsOnValue(O_BFreight - e.target.value));
+        var minus_Amt = O_BFreight - e.target.value - O_BOtherCharges - O_BWRT4Freight;
+        if((minus_Amt) > 0){
+          setO_BVehicleFreight(handleDecimalsOnValue(minus_Amt));
+          setO_BVehicleBal(handleDecimalsOnValue(minus_Amt));
         }
         else
         {
           setO_BComm("");
-          setO_BVehicleFreight(0);
-          setO_BVehicleBal(0);
+          setO_BVehicleFreight(O_BFreight - O_BOtherCharges - O_BWRT4Freight);
+          setO_BVehicleBal(O_BFreight - O_BOtherCharges - O_BWRT4Freight);
         }
       }
     }
@@ -617,7 +623,7 @@ function handleChange4(e) {
                    required />
           </div>
 
-          <div className="col-md-2">
+          <div className="col-md-2" hidden={true}>
         <label className="form-label">Tax Rate(%)</label>
         <input type="number" className="form-control" id="input_gst"
               value={Oils_GST}
@@ -654,7 +660,7 @@ function handleChange4(e) {
         <label className="form-label">Other Charges(Rs)*</label>
         <input type="number" className="form-control" 
                 value={O_BOtherCharges}
-                onChange={(e) => setO_BOtherCharges(e.target.value)}
+                onChange={handleChange7}
                 onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault();}}
               required />
       </div>
@@ -662,9 +668,8 @@ function handleChange4(e) {
         <label className="form-label">Vehicle Freight (Rs) *</label>
         <input type="number" className="form-control" 
                 value={O_BVehicleFreight}
-                onChange= {handleChange3}
                 onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault();}}
-               required />
+               required readOnly />
       </div>
       <div className="col-md-2">
         <label className="form-label">Advance To Vehicle (Rs)</label>

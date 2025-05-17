@@ -29,7 +29,7 @@ const ManageStockTransList = () => {
     {
       if($("#btnstktnfsubmit").text().trim() == "Save")
       {
-        fetch('http://localhost:5000/add_stk_transfer_values', { 
+        fetch('http://35.154.229.254/add_stk_transfer_values', { 
           method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -45,7 +45,7 @@ const ManageStockTransList = () => {
       }
       else if($("#btnstktnfsubmit").text().trim() == "Update")
         {
-            fetch('http://localhost:5000/update_stk_transfer_setup', { 
+            fetch('http://35.154.229.254/update_stk_transfer_setup', { 
               method: 'POST', 
               headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  },
@@ -77,7 +77,7 @@ const ManageStockTransList = () => {
       $('#c_stk_trn_table').DataTable().destroy();
     }
     $('#c_stk_trn_table tbody').empty();
-    fetch('http://localhost:5000/stock_transfer_data'+'/'+localStorage.getItem('id')).then((res) =>
+    fetch('http://35.154.229.254/stock_transfer_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsdata) => {
        for (let i = 0; i < jsdata.length; i++) {
         let row = '<tr>';
@@ -100,7 +100,7 @@ const ManageStockTransList = () => {
       let table;
       $("#stk_transfer_from").empty();
       $("#stk_transfer_from").append("<option value=''>Select</option>");
-        fetch('http://localhost:5000/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((jsprovdata) => {
             for (let i = 0; i < jsprovdata.length; i++) {
               $("#stk_transfer_from").append("<option style='text-transform:capitalize' value=\"" + jsprovdata[i].id  + "\">" + jsprovdata[i].ware_name + "</option>");     
@@ -108,7 +108,7 @@ const ManageStockTransList = () => {
     }));
     $("#stk_transfer_product").empty();
       $("#stk_transfer_product").append("<option value=''>Select</option>");
-          fetch('http://localhost:5000/stk_product_data'+'/'+localStorage.getItem('id')).then((res) =>
+          fetch('http://35.154.229.254/stk_product_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsprovdata) => {
             for (let i = 0; i < jsprovdata.length; i++) {
               $("#stk_transfer_product").append("<option style='text-transform:capitalize' value=\"" + jsprovdata[i].id  + "\">" + jsprovdata[i].product_name + "</option>");     
@@ -116,7 +116,7 @@ const ManageStockTransList = () => {
     }));
     $("#stk_transfer_to").empty();
     $("#stk_transfer_to").append("<option value=''>Select Account</option>");
-        fetch('http://localhost:5000/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
+        fetch('http://35.154.229.254/warehouse_data'+'/'+localStorage.getItem('id')).then((res) =>
           res.json().then((jsprovdata) => {
           for (let i = 0; i < jsprovdata.length; i++) {
             $("#stk_transfer_to").append("<option style='text-transform:capitalize' value=\"" + jsprovdata[i].id  + "\">" + jsprovdata[i].ware_name + "</option>");     
@@ -125,7 +125,7 @@ const ManageStockTransList = () => {
     loadJQueryAndDataTables()
     .then(($) => {
       window.$ = window.jQuery = $;
-      fetch('http://localhost:5000/stock_transfer_data'+'/'+localStorage.getItem('id')).then((res) =>
+      fetch('http://35.154.229.254/stock_transfer_data'+'/'+localStorage.getItem('id')).then((res) =>
         res.json().then((jsdata) => {
             for (let i = 0; i < jsdata.length; i++) {
               let row = '<tr>';
@@ -173,7 +173,7 @@ const ManageStockTransList = () => {
   $(document).off('click', '.stk_trsf_delete').on("click", '.stk_trsf_delete', function(e){
       e.preventDefault();
       var row_id = $(this).attr("data-lable");
-    fetch('http://localhost:5000/stk_transfer_delete/'+row_id+'/'+localStorage.getItem('id'), { 
+    fetch('http://35.154.229.254/stk_transfer_delete/'+row_id+'/'+localStorage.getItem('id'), { 
       method: 'DELETE', 
       headers:{   'Accept': 'application/json',
                 'Content-Type': 'application/json'  }, 

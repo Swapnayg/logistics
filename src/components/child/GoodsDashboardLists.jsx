@@ -282,7 +282,7 @@ const [seriesData, setseriesData] = useState([
 
 const handleIncomeExp = (e) => {
    e.preventDefault();
-   fetch("http://localhost:5000/goods_area_data",{method: 'POST', 
+   fetch("http://35.154.229.254/goods_area_data",{method: 'POST', 
     headers: {   'Accept': 'application/json',
       'Content-Type': 'application/json'  }, 
       body: JSON.stringify({"overallType":e.target.value, userid:localStorage.getItem('id')})
@@ -305,7 +305,7 @@ const handleIncomeExp = (e) => {
 
 const handleOverall = (e) => {
    e.preventDefault();
-   fetch("http://localhost:5000/goods_overall_data",{method: 'POST', 
+   fetch("http://35.154.229.254/goods_overall_data",{method: 'POST', 
     headers: {   'Accept': 'application/json',
       'Content-Type': 'application/json'  }, 
       body: JSON.stringify({"overallType":e.target.value, userid:localStorage.getItem('id')})
@@ -322,7 +322,7 @@ const handleOverall = (e) => {
 useEffect(() => {
   var username = localStorage.getItem('username');
   if (username) {
-    fetch("http://localhost:5000/goods_overall_data",{method: 'POST', 
+    fetch("http://35.154.229.254/goods_overall_data",{method: 'POST', 
       headers: {   'Accept': 'application/json',
         'Content-Type': 'application/json'  }, 
         body: JSON.stringify({"overallType":'year', userid:localStorage.getItem('id')})
@@ -335,7 +335,7 @@ useEffect(() => {
       setdoNutseriesData([parseInt(jsprovdata.perTotalPay), parseInt(jsprovdata.perTotalPRec)]);
    }));  
    
-   fetch("http://localhost:5000/goods_area_data",{method: 'POST', 
+   fetch("http://35.154.229.254/goods_area_data",{method: 'POST', 
     headers: {   'Accept': 'application/json',
       'Content-Type': 'application/json'  }, 
       body: JSON.stringify({"overallType":'year', userid:localStorage.getItem('id')})
@@ -354,7 +354,7 @@ useEffect(() => {
        },
      ]);
  }));   
-   fetch('http://localhost:5000/goods_dashboard_data'+'/'+localStorage.getItem('id')).then((res) =>
+   fetch('http://35.154.229.254/goods_dashboard_data'+'/'+localStorage.getItem('id')).then((res) =>
       res.json().then((jsprovdata) => {
         setManiCount(jsprovdata.cw_mani_count);
         setperManiCount(jsprovdata.mani_count_diff);

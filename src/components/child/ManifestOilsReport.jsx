@@ -23,7 +23,7 @@ const ManifestOilsReport = () => {
 
    const handlePrint = (e) => {
      var cust_Name = "Manifest Oils Report";
-     fetch('http://localhost:5000/generateManifestReport_pdf', { 
+     fetch('http://35.154.229.254/generateManifestReport_pdf', { 
        method: 'POST', 
           headers: {   'Accept': 'application/json',
             'Content-Type': 'application/json'  }, 
@@ -76,7 +76,7 @@ const ManifestOilsReport = () => {
         loadJQueryAndDataTables()
         .then(($) => {
           window.$ = window.jQuery = $;
-          fetch('http://localhost:5000/mainifest_oils_data'+'/'+localStorage.getItem('id')).then((res) =>
+          fetch('http://35.154.229.254/mainifest_oils_data'+'/'+localStorage.getItem('id')).then((res) =>
             res.json().then((jsdata) => {
               let freight_amt = 0;
               let comm_amt = 0;

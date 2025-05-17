@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "my-react-app",
+      name: "logistics",
       script: "npm",
       args: "start",
       instances: 1,
